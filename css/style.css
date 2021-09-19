@@ -76,7 +76,7 @@ a:active {
     float: left;
 	text-align: center;
 	color: #fff;
-    font-weight: bold;
+    font-weight:lighter;
     font-size: clamp(15px, 3vw, 200px);
 }
 
