@@ -1,59 +1,887 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
+    
     <link rel="canonical" href="https://www.eFootball.fans/" />
+    <!-- Open Graph / Facebook -->
     <meta property="og:locale" content="en_US" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://www.eFootball.fans/" />
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.eFootball.fans/">
     <meta property="og:site_name"
-        content="eFootball.Fans is Coming soon... Find eFootball Tournaments, skill tutorials, and tips for efootball fans." />
+        content="eFootball.Fans - International Community" />
+    <meta property="og:title" content="eFootball.fans - International Community">
+    <meta property="og:description" content="Join the largest international eFootball community! Connect with 10k+ players worldwide.">
 
-    <meta name="description"
-        content="This is a website meant for eFootball Fans from all platforms under development. When we release, you will find eFootball Tournaments, News, PES tricks, Tips, Guide & skill tutorials here. eFootball 2022 is the latest edition following e Football PES 2021 and is available for all platforms, i.e. PC (from Steam), Console (Play Station, Xbox), mobile (Android, iOS)." />
-    <title>eFootball Fans Coming soon...</title>
+    <title>eFootball.fans - eFootball Fans International Community</title>
     <link rel="icon" href="https://resources.eFootball.fans/favicon.ico" type="image/x-icon">
-    <link rel="preload" href="css/style.css" as="style">
-    <link rel="stylesheet" href="css/style.css">
+    <meta name="description" content="Join the largest international eFootball community! Connect with 10k+ players worldwide through Discord, Telegram, and our community blogs. You will find eFootball Tournaments, News, eFootball tricks, Tips, PES Guide & skill tutorials here. eFootball is the latest edition following PES series and is available for all platforms, i.e. PC (from Steam/Windows Store), Console (Play Station, Xbox), mobile (Android, iOS).">
+    
+
+    <style>
+        /* CSS Variables for consistent theming */
+        :root {
+            --primary-bg: #0a0a0a;
+            --secondary-bg: #1a1a1a;
+            --accent-bg: #2a2a2a;
+            --primary-text: #ffffff;
+            --secondary-text: #b0b0b0;
+            --accent-text: #00ff88;
+            --football-green: #00ff88;
+            --football-blue: #0066ff;
+            --gradient-primary: linear-gradient(135deg, #0066ff, #00ff88);
+            --gradient-secondary: linear-gradient(45deg, #1a1a1a, #2a2a2a);
+            --shadow-primary: 0 4px 20px rgba(0, 255, 136, 0.3);
+            --shadow-secondary: 0 2px 10px rgba(0, 0, 0, 0.5);
+            --border-radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--primary-bg);
+            color: var(--primary-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.95);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+
+        .header.scrolled {
+            background: rgba(10, 10, 10, 0.98);
+            box-shadow: var(--shadow-secondary);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--secondary-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-text);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary-text);
+            transition: var(--transition);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: radial-gradient(ellipse at center, rgba(0, 102, 255, 0.1) 0%, var(--primary-bg) 70%);
+            overflow: hidden;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            padding: 0 2rem;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
+            color: var(--secondary-text);
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--accent-text);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--secondary-text);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: var(--shadow-primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(0, 255, 136, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-text);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent-text);
+        }
+
+        /* Background Animation */
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .floating-element {
+            position: absolute;
+            background: rgba(0, 255, 136, 0.1);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+
+        .floating-element:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            width: 60px;
+            height: 60px;
+            left: 70%;
+            animation-delay: 5s;
+        }
+
+        .floating-element:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            left: 30%;
+            animation-delay: 10s;
+        }
+
+        .floating-element:nth-child(4) {
+            width: 40px;
+            height: 40px;
+            left: 80%;
+            animation-delay: 15s;
+        }
+
+        /* Communities Section */
+        .communities {
+            padding: 5rem 0;
+            background: var(--secondary-bg);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--secondary-text);
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .communities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .community-card {
+            background: var(--gradient-secondary);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .community-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+        }
+
+        .community-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-primary);
+        }
+
+        .community-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .community-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-primary);
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .community-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-text);
+        }
+
+        .community-members {
+            color: var(--accent-text);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .community-description {
+            color: var(--secondary-text);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .community-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .community-features li {
+            color: var(--secondary-text);
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .community-features li::before {
+            content: '⚽';
+            position: absolute;
+            left: 0;
+            color: var(--accent-text);
+        }
+
+        /* Blogs Section */
+        .blogs {
+            padding: 5rem 0;
+            background: var(--primary-bg);
+        }
+
+        .blogs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .blog-card {
+            background: var(--secondary-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-secondary);
+        }
+
+        .blog-image {
+            height: 200px;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+        }
+
+        .blog-content {
+            padding: 1.5rem;
+        }
+
+        .blog-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--primary-text);
+        }
+
+        .blog-description {
+            color: var(--secondary-text);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .blog-link {
+            color: var(--accent-text);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .blog-link:hover {
+            color: var(--football-blue);
+        }
+
+        /* Coming Soon Section */
+        .coming-soon {
+            padding: 5rem 0;
+            background: var(--secondary-bg);
+            text-align: center;
+        }
+
+        .coming-soon-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .coming-soon-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .coming-soon-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: var(--accent-bg);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-secondary);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--accent-text);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary-bg);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--accent-text);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: var(--secondary-text);
+            text-decoration: none;
+            line-height: 1.8;
+            transition: var(--transition);
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-text);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--secondary-text);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .communities-grid,
+            .blogs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+        }
+
+        /* Scroll animations */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .scroll-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
-
 <body>
-    <div class="wrapper">
-        <div class="banner-text">
-            <h2 class="header">eFootball.Fans</h2>
-            <ul>
-                <a class="colorHide" href="https://discord.efootball.fans">
-                    <li>Discord</li>
-                </a>
-                <a class="colorHide" href="https://telegram.efootball.fans/">
-                    <li>Telegram</li>
-                </a>
-                <a class="colorHide" href="about">
-                    <li>About</li>
-                </a>
+    <!-- Header -->
+    <header class="header" id="header">
+        <nav class="nav-container">
+            <a href="/" class="logo">eFootball.fans</a>
+            <ul class="nav-menu">
+                <li><a href="#communities" class="nav-link">Communities</a></li>
+                <li><a href="#blogs" class="nav-link">Blogs</a></li>
+                <li><a href="https://discord.efootball.fans" class="nav-link" target="_blank" rel="noopener">Discord</a></li>
+                <li><a href="https://telegram.efootball.fans" class="nav-link" target="_blank" rel="noopener">Telegram</a></li>
+                <li><a href="about" class="nav-link">About</a></li>
             </ul>
-        </div>
-        <div>
-            <h1 class="comingSoon">
-                Coming soon<span class="one">.</span><span class="two">.</span><span class="three">.</span>
-            </h1>
-        </div>
-        <div class="animation-area">
-            <ul class="box-area">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-            </ul>
-        </div>
-    </div>
-</body>
+            <div class="mobile-menu-toggle" id="mobileToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
 
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="floating-elements">
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+        </div>
+        <div class="hero-content">
+            <h1 class="hero-title">eFootball.fans</h1>
+            <p class="hero-subtitle">One of the largest international eFootball Fans community connecting passionate players worldwide</p>
+            
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">10K+</span>
+                    <span class="stat-label">Members</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">6+</span>
+                    <span class="stat-label">Years Strong</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">Global</span>
+                    <span class="stat-label">Community</span>
+                </div>
+            </div>
+
+            <div class="cta-buttons">
+                <a href="https://discord.efootball.fans" class="btn btn-primary" target="_blank" rel="noopener">Join Discord</a>
+                <a href="https://telegram.efootball.fans" class="btn btn-secondary" target="_blank" rel="noopener">Join Telegram</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Communities Section -->
+    <section class="communities scroll-animate" id="communities">
+        <div class="container">
+            <h2 class="section-title">Our Communities</h2>
+            <p class="section-subtitle">Connect with fellow eFootball enthusiasts across multiple platforms</p>
+            
+            <div class="communities-grid">
+                <div class="community-card">
+                    <div class="community-header">
+                        <div class="community-icon">💬</div>
+                        <div>
+                            <h3 class="community-title">Telegram Community</h3>
+                            <span class="community-members">10,000+ Members</span>
+                        </div>
+                    </div>
+                    <p class="community-description">
+                        One of the first and largest English-speaking eFootball international communities on Telegram. 
+                        Originally founded as PES Mobile International Community (P.M.I.C.) in 2018-2019.
+                    </p>
+                    <ul class="community-features">
+                        <li>Daily football discussions</li>
+                        <li>Friendly 1v1 matches</li>
+                        <li>Co-op gameplay sessions</li>
+                        <li>Latest eFootball news & updates</li>
+                    </ul>
+                    <a href="https://telegram.efootball.fans" class="btn btn-primary" target="_blank" rel="noopener">Join Telegram</a>
+                </div>
+
+                <div class="community-card">
+                    <div class="community-header">
+                        <div class="community-icon">🎮</div>
+                        <div>
+                            <h3 class="community-title">Discord Server</h3>
+                            <span class="community-members">Growing Community</span>
+                        </div>
+                    </div>
+                    <p class="community-description">
+                        A vibrant Discord community for all eFootball players and football fans across the globe. 
+                        Whether you play eFootball, EA FC, UFL, or any soccer game - you're welcome here!
+                    </p>
+                    <ul class="community-features">
+                        <li>Multi-platform gaming support</li>
+                        <li>Voice chat during matches</li>
+                        <li>Organized tournaments</li>
+                        <li>Strategy discussions</li>
+                    </ul>
+                    <a href="https://discord.efootball.fans" class="btn btn-primary" target="_blank" rel="noopener">Join Discord</a>
+                </div>
+
+                <div class="community-card">
+                    <div class="community-header">
+                        <div class="community-icon">📢</div>
+                        <div>
+                            <h3 class="community-title">Telegram Channel</h3>
+                            <span class="community-members">Game Updates, News, & Leaks</span>
+                        </div>
+                    </div>
+                    <p class="community-description">
+                        Stay ahead of the game with our dedicated Telegram channel for eFootball news, updates, 
+                        leaks, and exclusive content straight from the world of eFootball.
+                    </p>
+                    <ul class="community-features">
+                        <li>Latest news & leaks</li>
+                        <li>Player releases updates</li>
+                        <li>Event announcements</li>
+                        <li>Gameplay tips & tricks</li>
+                    </ul>
+                    <a href="https://t.me/eFootballFansChannel" class="btn btn-primary" target="_blank" rel="noopener">Follow Channel</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blogs Section -->
+    <section class="blogs scroll-animate" id="blogs">
+        <div class="container">
+            <h2 class="section-title">Our Blogs</h2>
+            <p class="section-subtitle">Stay informed with the latest news, tutorials, and community insights</p>
+            
+            <div class="blogs-grid">
+                <div class="blog-card">
+                    <div class="blog-image">📰</div>
+                    <div class="blog-content">
+                        <h3 class="blog-title">eFootball Fans Blog</h3>
+                        <p class="blog-description">
+                            Your go-to destination for all things eFootball! Latest news, leaks, player releases, 
+                            gameplay tips, and comprehensive tutorials.
+                        </p>
+                        <a href="https://blog.efootball.fans" class="blog-link" target="_blank" rel="noopener">Read Blog →</a>
+                    </div>
+                </div>
+
+                <div class="blog-card">
+                    <div class="blog-image">👥</div>
+                    <div class="blog-content">
+                        <h3 class="blog-title">Community Blog</h3>
+                        <p class="blog-description">
+                            A community-driven platform where fans share experiences, insights, and discussions. 
+                            Built by the fans, for the fans of eFootball!
+                        </p>
+                        <a href="https://community.efootball.fans" class="blog-link" target="_blank" rel="noopener">Visit Community →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coming Soon Section -->
+    <section class="coming-soon scroll-animate">
+        <div class="container">
+            <div class="coming-soon-content">
+                <h2 class="coming-soon-title">More Amazing Features Coming Soon</h2>
+                <p class="section-subtitle">We're working hard to bring you even more exciting events, features and platforms</p>
+                
+                <div class="coming-soon-features">
+                    <div class="feature-card">
+                        <div class="feature-icon">🏆</div>
+                        <h3 class="feature-title">Tournaments</h3>
+                        <p>Organize and participate in competitive tournaments with players from around the world in our community</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3 class="feature-title">Hall of Fame</h3>
+                        <p>Place to honor our community tournament champions</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3 class="feature-title">Community Leaderboards</h3>
+                        <p>Track your activity, compete with friends, and climb the community leaderboards</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3 class="feature-title">Training Hub</h3>
+                        <p>Tutorials, skill challenges, and training</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>eFootball.fans</h3>
+                    <p>One of the largest international eFootball Fans community connecting passionate players and football fans worldwide since 2018.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Communities</h3>
+                    <p><a href="https://telegram.efootball.fans" target="_blank" rel="noopener">Telegram Group</a></p>
+                    <p><a href="https://discord.efootball.fans" target="_blank" rel="noopener">Discord Server</a></p>
+                    <p><a href="https://t.me/eFootballFansChannel" target="_blank" rel="noopener">News Channel</a></p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <p><a href="https://blog.efootball.fans" target="_blank" rel="noopener">Main Blog</a></p>
+                    <p><a href="https://community.efootball.fans" target="_blank" rel="noopener">Community Blog</a></p>
+                    <p><a href="/about">About Us</a></p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Connect</h3>
+                    <p>Join our global community of 10,000+ members and stay updated with the latest eFootball news and events.</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 eFootball.fans. Built with ⚽ for the global eFootball community.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script_js.js"></script>
+
+
+</body>
 </html>

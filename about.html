@@ -1,59 +1,816 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
-    <link rel="canonical" href="https://www.eFootball.fans/" />
+    
+    <link rel="canonical" href="https://www.eFootball.fans/about" />
+    <!-- Open Graph / Facebook -->
     <meta property="og:locale" content="en_US" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://www.eFootball.fans/" />
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.eFootball.fans/about">
     <meta property="og:site_name"
-        content="eFootball.Fans is Coming soon... Find eFootball Tournaments, skill tutorials, and tips for efootball fans." />
+        content="eFootball.Fans - International Community" />
+    <meta property="og:title" content="About eFootball.fans - International Community">
+    <meta property="og:description" content="Learn about our journey from 2018 to becoming the largest international eFootball community with 10k+ members worldwide.">
 
-    <meta name="description"
-        content="This is a website meant for all e Football Fans of all platforms including mobile, under making. When its released, you will find eFootball Tournaments, news, PES tricks, tips, guide & skill tutorials eFootball 2022 is the latest edition following e Football PES 2021 and is available for PC, Play Station, X-Box and Mobile." />
-    <title>About eFootball Fans</title>
+    <title>About Us - eFootball.fans International Community</title>
     <link rel="icon" href="https://resources.eFootball.fans/favicon.ico" type="image/x-icon">
-    <link rel="preload" href="css/style.css" as="style">
-    <link rel="stylesheet" href="css/style.css">
+    <meta name="description" content="Learn about eFootball.fans - the largest international eFootball community that started in 2018. Discover our journey from PES Mobile International Community to a global hub of 10k+ members.">
+    
+    <style>
+        /* CSS Variables for consistent theming */
+        :root {
+            --primary-bg: #0a0a0a;
+            --secondary-bg: #1a1a1a;
+            --accent-bg: #2a2a2a;
+            --primary-text: #ffffff;
+            --secondary-text: #b0b0b0;
+            --accent-text: #00ff88;
+            --football-green: #00ff88;
+            --football-blue: #0066ff;
+            --gradient-primary: linear-gradient(135deg, #0066ff, #00ff88);
+            --gradient-secondary: linear-gradient(45deg, #1a1a1a, #2a2a2a);
+            --shadow-primary: 0 4px 20px rgba(0, 255, 136, 0.3);
+            --shadow-secondary: 0 2px 10px rgba(0, 0, 0, 0.5);
+            --border-radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--primary-bg);
+            color: var(--primary-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header Styles (Reused from landing page) */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.95);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+
+        .header.scrolled {
+            background: rgba(10, 10, 10, 0.98);
+            box-shadow: var(--shadow-secondary);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--secondary-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--accent-text);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary-text);
+            transition: var(--transition);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: radial-gradient(ellipse at center, rgba(0, 102, 255, 0.1) 0%, var(--primary-bg) 70%);
+            overflow: hidden;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            padding: 0 2rem;
+            z-index: 2;
+            margin-top: 70px;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
+            color: var(--secondary-text);
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .content-section {
+            padding: 4rem 0;
+        }
+
+        .content-section:nth-child(even) {
+            background: var(--secondary-bg);
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--secondary-text);
+            margin-bottom: 2rem;
+        }
+
+        .section-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .section-content strong {
+            color: var(--accent-text);
+            font-weight: 600;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            margin: 3rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--gradient-primary);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            flex: 1;
+            background: var(--accent-bg);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 0 2rem;
+            transition: var(--transition);
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-secondary);
+        }
+
+        .timeline-year {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-text);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-text);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-description {
+            color: var(--secondary-text);
+            line-height: 1.6;
+        }
+
+        .timeline-dot {
+            width: 20px;
+            height: 20px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            border: 4px solid var(--primary-bg);
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            background: var(--gradient-secondary);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-primary);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--accent-text);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--secondary-text);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        /* Community Features */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .feature-card {
+            background: var(--accent-bg);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-secondary);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-text);
+            margin-bottom: 1rem;
+        }
+
+        .feature-description {
+            color: var(--secondary-text);
+            line-height: 1.6;
+        }
+
+        /* Call to Action */
+        .cta-section {
+            background: var(--gradient-primary);
+            padding: 4rem 2rem;
+            text-align: center;
+            border-radius: var(--border-radius);
+            margin: 3rem 0;
+        }
+
+        .cta-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .cta-description {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--football-blue);
+        }
+
+        .btn-white:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: white;
+        }
+
+        /* Footer (Reused from landing page) */
+        .footer {
+            background: var(--primary-bg);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--accent-text);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: var(--secondary-text);
+            text-decoration: none;
+            line-height: 1.8;
+            transition: var(--transition);
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-text);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--secondary-text);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                flex-direction: column !important;
+                align-items: flex-start;
+            }
+
+            .timeline-content {
+                margin: 0 0 0 3rem;
+            }
+
+            .timeline-dot {
+                left: 20px;
+            }
+
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        /* Scroll animations */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .scroll-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
-
 <body>
-    <div class="wrapper">
-        <div class="banner-text">
-            <h2 class="header">eFootball.Fans</h2>
-            <ul>
-                <a class="colorHide" href="https://discord.efootball.fans">
-                    <li>Discord</li>
-                </a>
-                <a class="colorHide" href="https://telegram.efootball.fans/">
-                    <li>Telegram</li>
-                </a>
-                <a class="colorHide" href="/">
-                    <li>Home</li>
-                </a>
+    <!-- Header -->
+    <header class="header" id="header">
+        <nav class="nav-container">
+            <a href="/" class="logo">eFootball.fans</a>
+            <ul class="nav-menu">
+                <li><a href="/#communities" class="nav-link">Communities</a></li>
+                <li><a href="/#blogs" class="nav-link">Blogs</a></li>
+                <li><a href="https://discord.efootball.fans" class="nav-link" target="_blank" rel="noopener">Discord</a></li>
+                <li><a href="https://telegram.efootball.fans" class="nav-link" target="_blank" rel="noopener">Telegram</a></li>
+                <li><a href="/about" class="nav-link active">About</a></li>
             </ul>
-        </div>
-        <div>
-            <h1 class="comingSoon">
-                Page under construction<span class="one">.</span><span class="two">.</span><span class="three">.</span>
-            </h1>
-        </div>
-        <div class="animation-area">
-            <ul class="box-area">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-            </ul>
-        </div>
-    </div>
-</body>
+            <div class="mobile-menu-toggle" id="mobileToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
 
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">About eFootball.fans</h1>
+            <p class="hero-subtitle">Discover the story behind the world's largest international eFootball community</p>
+        </div>
+    </section>
+
+    <!-- Our Story -->
+    <section class="content-section scroll-animate">
+        <div class="container">
+            <h2 class="section-title">Our Story</h2>
+            <div class="section-content">
+                <p>
+                    <strong>eFootball Fans International Community</strong> is more than just a gaming community – we're a global family of passionate football enthusiasts and eFootball players who have been connecting hearts and minds across continents since our humble beginnings.
+                </p>
+                <p>
+                    What started as a small group of PES Mobile enthusiasts in late 2018 has evolved into one of the most vibrant and inclusive international eFootball communities on the planet. Our journey from the <strong>"PES Mobile International Community (P.M.I.C.)"</strong> to <strong>eFootball Fans International Community</strong> reflects not just the evolution of the game we love, but also our commitment to growing and adapting with our community.
+                </p>
+                <p>
+                    Today, we proudly stand as a thriving hub of <strong>over 10,000 members</strong> from every corner of the globe, united by our shared passion for football and the beautiful game in all its digital forms.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="content-section scroll-animate">
+        <div class="container">
+            <h2 class="section-title">Our Journey</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2018-2019</div>
+                        <div class="timeline-title">The Beginning</div>
+                        <div class="timeline-description">
+                            Founded as "PES Mobile International Community (P.M.I.C.)" - one of the first English-speaking international communities dedicated to bringing PES Mobile players together from around the world.
+                        </div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2019-2020</div>
+                        <div class="timeline-title">Growing Community</div>
+                        <div class="timeline-description">
+                            Expanded our reach across multiple platforms and regions, establishing ourselves as a trusted hub for PES Mobile enthusiasts and football fans worldwide.
+                        </div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2020-2021</div>
+                        <div class="timeline-title">Evolution & Adaptation</div>
+                        <div class="timeline-description">
+                            Transitioned alongside the gaming landscape, evolving from PES to eFootball while maintaining our core mission of connecting passionate players globally.
+                        </div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2021-Present</div>
+                        <div class="timeline-title">eFootball.fans Era</div>
+                        <div class="timeline-description">
+                            Rebranded as eFootball Fans International Community, expanded to multiple platforms including Discord, launched community blogs, and reached 10,000+ members strong.
+                        </div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Stats -->
+    <section class="content-section scroll-animate">
+        <div class="container">
+            <h2 class="section-title">Community by Numbers</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">10K+</span>
+                    <span class="stat-label">Active Members</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">6+</span>
+                    <span class="stat-label">Years Strong</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">Countries</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">24/7</span>
+                    <span class="stat-label">Global Activity</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What We Offer -->
+    <section class="content-section scroll-animate">
+        <div class="container">
+            <h2 class="section-title">What Makes Us Special</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3 class="feature-title">Global Community</h3>
+                    <p class="feature-description">
+                        Connect with passionate football fans and eFootball players from every continent. Our diverse community speaks the universal language of football.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎮</div>
+                    <h3 class="feature-title">Multi-Platform Gaming</h3>
+                    <p class="feature-description">
+                        Whether you play in Mobile, Console or PC - eFootball, EA FC, UFL, DLS, or any soccer game - our community welcomes all football gaming enthusiasts with open arms.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⚽</div>
+                    <h3 class="feature-title">Football Passion</h3>
+                    <p class="feature-description">
+                        Engage in daily discussions about real football, share your love for the sport, and stay updated with the latest developments in the football world.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🤝</div>
+                    <h3 class="feature-title">Friendly Matches</h3>
+                    <p class="feature-description">
+                        Participate in friendly 1v1 matches, co-op gameplay sessions, and organized tournaments that bring out the competitive spirit in everyone.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📰</div>
+                    <h3 class="feature-title">Latest Updates</h3>
+                    <p class="feature-description">
+                        Stay ahead of the game with our dedicated news channels, blogs, and community discussions about the latest eFootball updates and leaks.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">💡</div>
+                    <h3 class="feature-title">Community-Driven</h3>
+                    <p class="feature-description">
+                        Our community is built by fans, for fans. Every member contributes to creating an inclusive and welcoming environment for all.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Mission -->
+    <section class="content-section scroll-animate">
+        <div class="container">
+            <h2 class="section-title">Our Mission</h2>
+            <div class="section-content">
+                <p>
+                    Our mission is simple yet powerful: <strong>to create the most inclusive, welcoming, and vibrant international community for football and eFootball enthusiasts</strong>.
+                </p>
+                <p>
+                    We believe that football is more than just a game – it's a universal language that connects people across cultures, continents, and backgrounds. Through our digital platforms, we aim to:
+                </p>
+                <p>
+                    <strong>• Foster Global Connections:</strong> Bring together players from all corners of the world to share their passion for football and gaming.
+                </p>
+                <p>
+                    <strong>• Support All Skill Levels:</strong> Whether you're a casual fan or a competitive pro, our community provides a space for everyone to learn, grow, and enjoy.
+                </p>
+                <p>
+                    <strong>• Share Knowledge & Experiences:</strong> Create platforms where community members can share insights, strategies, tips, and personal gaming experiences.
+                </p>
+                <p>
+                    <strong>• Stay Current & Informed:</strong> Keep our community updated with the latest news, developments, and exclusive content from the world of eFootball and football gaming.
+                </p>
+                <p>
+                    <strong>• Build Lasting Friendships:</strong> Facilitate meaningful connections that extend beyond gaming, creating a true sense of community and belonging.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="content-section scroll-animate">
+        <div class="container">
+            <div class="cta-section">
+                <h2 class="cta-title">Ready to Join Our Global Family?</h2>
+                <p class="cta-description">
+                    Become part of the world's largest international eFootball telegram community. Connect with 10,000+ passionate players, share your love for football, and experience the true spirit of global gaming community.
+                </p>
+                <div class="cta-buttons">
+                    <a href="https://telegram.efootball.fans" class="btn btn-white" target="_blank" rel="noopener">Join Telegram</a>
+                    <a href="https://discord.efootball.fans" class="btn btn-outline" target="_blank" rel="noopener">Join Discord</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>eFootball.fans</h3>
+                    <p>One of the largest international eFootball Fans community connecting passionate players and football fans worldwide since 2018.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Communities</h3>
+                    <p><a href="https://telegram.efootball.fans" target="_blank" rel="noopener">Telegram Group</a></p>
+                    <p><a href="https://discord.efootball.fans" target="_blank" rel="noopener">Discord Server</a></p>
+                    <p><a href="https://t.me/eFootballFansChannel" target="_blank" rel="noopener">News Channel</a></p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <p><a href="https://blog.efootball.fans" target="_blank" rel="noopener">Main Blog</a></p>
+                    <p><a href="https://community.efootball.fans" target="_blank" rel="noopener">Community Blog</a></p>
+                    <p><a href="/about">About Us</a></p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Connect</h3>
+                    <p>Join our global community of 10,000+ members and stay updated with the latest eFootball news and events.</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 eFootball.fans. Built with ⚽ for the global eFootball community.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script_js.js"></script>
+
+
+</body>
 </html>
